@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Calendario - Virelda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fa-solid fa-language"></i>
+            <span>Universo Virelda</span>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Traductor</a>
+            <a href="banco.html">Banco</a>
+            <a href="simulador.html">Simulador</a>
+            <a href="personajes.html">Personajes</a>
+            <a href="calendario.html">Calendario</a>
+        </nav>
+    </header>
+
+    <main class="centered" style="align-items: flex-start;">
+        <div class="container" style="max-width: 1000px;">
+            
+            <!-- Cabecera y Botón para cambiar vista -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
+                <h1 style="margin: 0;"><i class="fa-solid fa-calendar-days"></i> Calendario de Virelda</h1>
+                <button id="btn-vista-calendario" onclick="toggleVistaCalendario()" style="margin: 0; background: #84934A; color: #3b2f2f;">
+                    <i class="fa-solid fa-list-ul"></i> Ver como Lista
+                </button>
+            </div>
+            
+            <!-- Controles de navegación mes a mes -->
+            <div id="controles-mes" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; background: #ffffff; padding: 15px; border-radius: 12px; border: 1px solid #84934A;">
+                <button onclick="cambiarMes(-1)" style="margin: 0;"><i class="fa-solid fa-chevron-left"></i> Anterior</button>
+                <h2 id="mes-actual" style="margin: 0; font-size: 24px;">Mes</h2>
+                <button onclick="cambiarMes(1)" style="margin: 0;">Siguiente <i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+
+            <!-- Contenedor donde se dibuja el calendario -->
+            <div id="calendario-contenedor">
+                <!-- Se inyecta con JS -->
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Creado con Culo 🩷</p>
+    </footer>
+    <script src="js/calendario.js"></script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Personajes - Virelda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <i class="fa-solid fa-language"></i>
+            <span>Universo Virelda</span>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Traductor</a>
+            <a href="banco.html">Banco</a>
+            <a href="simulador.html">Simulador</a>
+            <a href="personajes.html">Personajes</a>
+            <a href="calendario.html">Calendario</a>
+        </nav>
+    </header>
+
+    <main class="centered" style="align-items: flex-start;">
+        <div class="container" style="max-width: 1000px;">
+            <h1><i class="fa-solid fa-users"></i> Base de Personajes</h1>
+
+            <!-- Panel de Estadísticas -->
+            <div class="stats-dashboard" id="panel-estadisticas">
+                <div class="stat-box">
+                    <h4>Por Edad</h4>
+                    <div id="stats-edades"></div>
+                </div>
+                <div class="stat-box">
+                    <h4>Por Arquetipo</h4>
+                    <div id="stats-arquetipos"></div>
+                </div>
+            </div>
+
+            <!-- Barra de búsqueda y filtros (Fila 1) -->
+            <div class="search-controls" style="margin-bottom: 10px;">
+                <input type="text" id="buscar-pj" placeholder="Buscar personaje...">
+                <select id="filtro-arquetipo">
+                    <option value="todos">Todos los Arquetipos</option>
+                    <option value="Marked Ones">Marked Ones</option>
+                    <option value="Guard of the Mark">Guard of the Mark</option>
+                    <option value="Civilian">Civilian</option>
+                </select>
+                <button id="btn-vista" style="margin: 0;" title="Cambiar Vista"><i
+                        class="fa-solid fa-border-all"></i></button>
+                <button id="btn-nuevo" style="margin: 0; background: #84934A; color:#3b2f2f;" title="Crear Nuevo"><i
+                        class="fa-solid fa-plus"></i> Nuevo</button>
+            </div>
+
+            <!-- Fila de Copia de Seguridad (Fila 2) -->
+            <div
+                style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 25px; justify-content: flex-end; padding-top: 15px; border-top: 1px dashed #84934A;">
+                <span style="margin-right: auto; color: #656D3F; font-weight: bold; align-self: center;">
+                    <i class="fa-solid fa-server"></i> Copia de Seguridad:
+                </span>
+
+                <button id="btn-exportar" style="margin: 0; background: #3b2f2f;" title="Descargar copia de seguridad">
+                    <i class="fa-solid fa-file-export"></i> Exportar
+                </button>
+
+                <label for="input-importar"
+                    style="margin: 0; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; font-size: 16px; background: #3b2f2f; color: #ffffff; border-radius: 8px; font-weight: 600; transition: background 0.3s;"
+                    title="Subir copia de seguridad">
+                    <i class="fa-solid fa-file-import"></i> Importar
+                    <input type="file" id="input-importar" accept=".json" style="display: none;">
+                </label>
+            </div>
+
+            <div id="galeria-personajes" class="vista-lista"></div>
+        </div>
+    </main>
+
+    <!-- Modal Rápido para Crear -->
+    <dialog id="modal-crear" class="modal">
+        <h2 style="margin-top:0;">Nuevo Personaje</h2>
+        <input type="text" id="pj-nombre" placeholder="Nombre completo" style="border-radius: 8px;">
+
+        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+            <select id="pj-dia" style="flex: 1; border-radius: 8px; padding: 10px; border: 1px solid #84934A;">
+                <option value="">Día</option>
+            </select>
+            <select id="pj-mes" style="flex: 2; border-radius: 8px; padding: 10px; border: 1px solid #84934A;">
+                <option value="">Mes</option>
+                <option value="1">Enero</option>
+                <option value="2">Febrero</option>
+                <option value="3">Marzo</option>
+                <option value="4">Abril</option>
+                <option value="5">Mayo</option>
+                <option value="6">Junio</option>
+                <option value="7">Julio</option>
+                <option value="8">Agosto</option>
+                <option value="9">Septiembre</option>
+                <option value="10">Octubre</option>
+            </select>
+            <input type="number" id="pj-edad" placeholder="Edad"
+                style="flex: 1; margin:0; border-radius: 8px; padding: 10px; border: 1px solid #84934A;">
+        </div>
+
+        <div style="display: flex; gap: 10px; justify-content: center;">
+            <button id="btn-guardar-nuevo">Crear y Editar</button>
+            <button id="btn-cancelar-nuevo" class="btn-danger">Cancelar</button>
+        </div>
+    </dialog>
+
+    <footer>
+        <p>Creado con Culo 🩷</p>
+    </footer>
+
+    <script src="js/personajes.js"></script>
+</body>
+
+</html>

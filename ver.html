@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil de Personaje - Virelda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fa-solid fa-language"></i>
+            <span>Universo Virelda</span>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Traductor</a>
+            <a href="banco.html">Banco</a>
+            <a href="simulador.html">Simulador</a>
+            <a href="personajes.html">Personajes</a>
+            <a href="calendario.html">Calendario</a>
+        </nav>
+    </header>
+
+    <main class="centered">
+        <div class="container" style="max-width: 800px; text-align: left;">
+            <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 30px; flex-wrap: wrap;">
+                <img id="ver-img" src="" style="width: 150px; height: 150px; object-fit: cover; border-radius: 12px; border: 3px solid #656D3F;">
+                <div>
+                    <h1 id="ver-nombre" style="margin: 0 0 10px 0; font-size: 2.5em; color: #656D3F;">Cargando...</h1>
+                    <p style="font-size: 18px; margin: 5px 0;"><strong>Edad:</strong> <span id="ver-edad"></span></p>
+                    <p style="font-size: 18px; margin: 5px 0;"><strong>Arquetipo:</strong> <span id="ver-arquetipo"></span></p>
+                </div>
+                <div style="flex-grow: 1; text-align: right;">
+                    <button id="btn-ir-editar"><i class="fa-solid fa-pen"></i> Editar Info</button>
+                </div>
+            </div>
+
+            <div id="sec-conexiones" class="seccion-detalle">
+                <h2 style="border-bottom: 2px solid #84934A;"><i class="fa-solid fa-handshake"></i> Conexiones</h2>
+                <p id="txt-conexiones" style="white-space: pre-wrap;"></p>
+            </div>
+
+            <div id="sec-apariencia" class="seccion-detalle">
+                <h2 style="border-bottom: 2px solid #84934A;"><i class="fa-solid fa-dna"></i> Fisiología y Apariencia</h2>
+                <p id="txt-apariencia" style="white-space: pre-wrap;"></p>
+            </div>
+
+            <div id="sec-personalidad" class="seccion-detalle">
+                <h2 style="border-bottom: 2px solid #84934A;"><i class="fa-solid fa-brain"></i> Personalidad y Gustos</h2>
+                <p id="txt-personalidad" style="white-space: pre-wrap;"></p>
+            </div>
+
+            <div id="sec-habilidades" class="seccion-detalle">
+                <h2 style="border-bottom: 2px solid #84934A;"><i class="fa-solid fa-star"></i> Habilidades y Magia</h2>
+                <p id="txt-habilidades" style="white-space: pre-wrap;"></p>
+            </div>
+
+            <div id="sec-historia" class="seccion-detalle">
+                <h2 style="border-bottom: 2px solid #84934A;"><i class="fa-solid fa-file-lines"></i> Historia</h2>
+                <p id="txt-historia" style="white-space: pre-wrap;"></p>
+            </div>
+
+            <div id="sec-curiosidades" class="seccion-detalle">
+                <h2 style="border-bottom: 2px solid #84934A;"><i class="fa-solid fa-book-open"></i> Datos Curiosos y Secretos</h2>
+                <p id="txt-curiosidades" style="white-space: pre-wrap;"></p>
+            </div>
+
+            <a href="personajes.html" style="display: block; margin-top: 30px; text-align: center; font-weight: bold; color: #656D3F; text-decoration: none;">⬅ Volver a los Personajes</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>Creado con Culo 🩷</p>
+    </footer>
+
+    <script src="js/ver.js"></script>
+</body>
+</html>

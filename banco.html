@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Banco de Palabras - Valari</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <i class="fa-solid fa-language"></i>
+            <span>Universo Virelda</span>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Traductor</a>
+            <a href="banco.html">Banco</a>
+            <a href="simulador.html">Simulador</a>
+            <a href="personajes.html">Personajes</a>
+            <a href="calendario.html">Calendario</a>
+        </nav>
+    </header>
+
+    <main class="centered">
+        <div class="container">
+            <h1>Diccionario Valari</h1>
+            <p>Aquí puedes consultar todas las palabras disponibles en el traductor:</p>
+
+            <div class="search-controls">
+                <input type="text" id="busqueda" placeholder="Buscar palabra..." />
+                <select id="criterio-busqueda">
+                    <option value="ambos">Buscar en Ambos</option>
+                    <option value="ingles">Buscar en Inglés</option>
+                    <option value="valari">Buscar en Valari</option>
+                </select>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Inglés</th>
+                            <th>Valari</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-palabras">
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <a href="index.html" class="btn-volver">⬅ Volver al traductor</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Creado con Culo 🩷</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+
+    <script>
+        // Asegúrate de que valariDict está disponible globalmente desde script.js
+        if (typeof valariDict === 'undefined') {
+            console.error("Error: El diccionario 'valariDict' no está cargado. Asegúrate de que script.js esté correctamente vinculado.");
+        }
+
+        const tabla = document.getElementById("tabla-palabras");
+        const busqueda = document.getElementById("busqueda");
+        const criterioBusqueda = document.getElementById("criterio-busqueda");
+
+        function calcularRelevancia(text, filtro) {
+            if (!filtro) return 0;
+
+            const textLower = text.toLowerCase();
+
+            // 1. Coincidencia EXACTA (Máxima prioridad)
+            if (textLower === filtro) {
+                return 3;
+            }
+
+            // 2. Coincidencia al INICIO de la palabra (Alta prioridad)
+            if (textLower.startsWith(filtro)) {
+                return 2;
+            }
+
+            // 3. Coincidencia PARCIAL (Menor prioridad)
+            if (textLower.includes(filtro)) {
+                return 1;
+            }
+
+            return 0;
+        }
+
+        // Función para llenar y ordenar la tabla
+        function cargarTabla(filtro = "", criterio = "ambos") {
+            tabla.innerHTML = "";
+
+            // Si el filtro está vacío, volvemos a la tabla completa ordenada alfabéticamente
+            if (!filtro) {
+                // Mantenemos el orden alfabético original
+                const palabrasOrdenadas = Object.keys(valariDict).sort();
+
+                let contador = 1;
+                palabrasOrdenadas.forEach(ing => {
+                    const fila = document.createElement("tr");
+                    fila.innerHTML = `<td>${contador}</td><td>${ing}</td><td>${valariDict[ing]}</td>`;
+                    tabla.appendChild(fila);
+                    contador++;
+                });
+                return;
+            }
+
+            const palabrasOrdenadas = Object.keys(valariDict).sort();
+            const filtroLower = filtro.toLowerCase();
+            const resultadosFiltrados = [];
+
+            palabrasOrdenadas.forEach(ing => {
+                const valari = valariDict[ing];
+                const ingLower = ing.toLowerCase();
+                const valariLower = valari.toLowerCase();
+
+                let cumpleFiltro = false;
+                let relevancia = 0;
+                let textoBusqueda = "";
+
+                // Lógica de FILTRADO y determinación del texto a puntuar
+                if (criterio === "ingles" && ingLower.includes(filtroLower)) {
+                    cumpleFiltro = true;
+                    textoBusqueda = ing;
+                } else if (criterio === "valari" && valariLower.includes(filtroLower)) {
+                    cumpleFiltro = true;
+                    textoBusqueda = valari;
+                } else if (criterio === "ambos" && (ingLower.includes(filtroLower) || valariLower.includes(filtroLower))) {
+                    cumpleFiltro = true;
+                    // En "ambos", priorizamos la coincidencia en Inglés para el puntaje.
+                    textoBusqueda = ingLower.includes(filtroLower) ? ing : valari;
+                }
+
+                // Si cumple el filtro, calcula la relevancia y guarda el resultado
+                if (cumpleFiltro) {
+                    relevancia = calcularRelevancia(textoBusqueda, filtroLower);
+                    resultadosFiltrados.push({
+                        ing: ing,
+                        valari: valari,
+                        relevancia: relevancia,
+                        // Usar la palabra en inglés para el desempate por orden alfabético
+                        ordenAlfabetico: ingLower
+                    });
+                }
+            });
+
+            // 3. Lógica de ORDENAMIENTO: Ordena por Relevancia (descendente) y luego por Orden Alfabético
+            resultadosFiltrados.sort((a, b) => {
+                // Primero, compara por relevancia (los puntajes más altos van primero)
+                if (b.relevancia !== a.relevancia) {
+                    return b.relevancia - a.relevancia;
+                }
+                // Segundo, si las relevancias son iguales, ordena alfabéticamente
+                if (a.ordenAlfabetico < b.ordenAlfabetico) {
+                    return -1;
+                }
+                if (a.ordenAlfabetico > b.ordenAlfabetico) {
+                    return 1;
+                }
+                return 0;
+            });
+
+            // 4. Renderizado: Renderiza los resultados ordenados en la tabla
+            let contador = 1;
+            resultadosFiltrados.forEach(item => {
+                const fila = document.createElement("tr");
+                fila.innerHTML = `<td>${contador}</td><td>${item.ing}</td><td>${item.valari}</td>`;
+                tabla.appendChild(fila);
+                contador++;
+            });
+        }
+
+        // Inicializar tabla al cargar la página (muestra todo ordenado alfabéticamente)
+        cargarTabla();
+
+        // Función para manejar el evento de cambio en el selector o la caja de búsqueda
+        const manejarBusqueda = () => {
+            const filtro = busqueda.value;
+            const criterio = criterioBusqueda.value;
+            cargarTabla(filtro, criterio);
+        };
+
+        // Escuchar eventos en la caja de búsqueda y en el selector
+        busqueda.addEventListener("input", manejarBusqueda);
+        criterioBusqueda.addEventListener("change", manejarBusqueda);
+    </script>
+</body>
+
+</html>
