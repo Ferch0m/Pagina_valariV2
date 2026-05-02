@@ -18,18 +18,24 @@ body {
 }
 
 /* ============================== */
-/* HEADER UNIFICADO (ALTURA FIJA) */
+/* HEADER UNIFICADO               */
 /* ============================== */
 header {
-    background: linear-gradient(360deg, #84934A, #656D3F);
-    color: #ECECEC;
+    background: linear-gradient(90deg, #be9b7b, #854442);
+    color: #fff4e6;
     padding: 0 30px;
-    height: 70px; /* ¡Esto fuerza a que midan exactamente lo mismo! */
+    height: 70px; 
     display: flex;
     align-items: center;
     justify-content: space-between;
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     width: 100%;
+    box-sizing: border-box;
+    
+    /* ¡NUEVAS LÍNEAS PARA FIJAR EL HEADER! */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 header .logo {
