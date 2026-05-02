@@ -8,7 +8,7 @@ const festividades = {
     // Ejemplo: 2 de Octubre (Índice 9 es Octubre)
     5: { 4: "Purification Day" }, 
     9: { 13: "Echo of Kaerith" },
-    5: { 1: "The Day Of Sacrifice" },
+    5: { 1: "The Day Of Sacrifice" }
 };
 
 let mesMostrado = 0; // 0 = Enero
