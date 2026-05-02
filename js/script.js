@@ -14,7 +14,7 @@ const valariDict = {
     "that": "sod", "those": "sode", 
 
     // Particles
-    "the": "vor", "a": "va", "to": "na", "and": "pote", "in": "rin",
+    "the": "vor", "a": "va", "or": "or", "to": "na", "and": "pote", "in": "rin",
     "of": "del", "with": "mor", "when": "pon", "still": "kata",
 
     // Nouns
