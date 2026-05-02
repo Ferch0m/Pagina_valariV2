@@ -6,7 +6,9 @@ const meses = [
 // Aquí agregas las fechas importantes de tu Lore
 const festividades = {
     // Ejemplo: 2 de Octubre (Índice 9 es Octubre)
-    9: { 2: "Día de Purificación" } 
+    5: { 4: "Purification Day" }, 
+    9: { 13: "Echo of Kaerith" },
+    5: { 1: "The Day Of Sacrifice" },
 };
 
 let mesMostrado = 0; // 0 = Enero
