@@ -3,13 +3,13 @@ const meses = [
     "Julio", "Agosto", "Septiembre", "Octubre"
 ];
 
-// Aquí agregas las fechas importantes de tu Lore
-const festividades = {
-    // Ejemplo: 2 de Octubre (Índice 9 es Octubre)
-    5: { 4: "Purification Day" }, 
-    9: { 13: "Echo of Kaerith" },
-    5: { 1: "The Day Of Sacrifice" }
-};
+// NUEVA FORMA: Array de festividades. Puedes poner todas las que quieras.
+// Recuerda: el mes se cuenta desde 0 (Enero = 0, Octubre = 9)
+const festividades = [
+    { mes: 5, dia: 4, nombre: "Purification Day" },
+    { mes: 5, dia: 1, nombre: "The Day Of Sacrifice" },
+    { mes: 9, dia: 13, nombre: "Echo of Kaerith" }
+];
 
 let mesMostrado = 0; // 0 = Enero
 let vistaLista = false; // Controla si vemos 1 mes o los 10 meses
@@ -50,10 +50,11 @@ function generarHTMLMes(indiceMes, personajes) {
         let clasesDia = "calendar-day";
         let contenidoEventos = "";
 
-        // Buscar festividades
-        if (festividades[indiceMes] && festividades[indiceMes][i]) {
-            contenidoEventos += `<div class="event-badge event-festivity"><i class="fa-solid fa-star"></i> ${festividades[indiceMes][i]}</div>`;
-        }
+        // NUEVA LÓGICA: Buscar TODAS las festividades que coincidan con este mes y día
+        const festividadesDelDia = festividades.filter(f => f.mes === indiceMes && f.dia === i);
+        festividadesDelDia.forEach(fest => {
+            contenidoEventos += `<div class="event-badge event-festivity"><i class="fa-solid fa-star"></i> ${fest.nombre}</div>`;
+        });
 
         // Buscar cumpleaños de personajes
         const cumpleaneros = personajes.filter(p => parseInt(p.mesNacimiento) === (indiceMes + 1) && parseInt(p.diaNacimiento) === i);
